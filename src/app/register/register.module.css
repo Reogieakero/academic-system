@@ -82,17 +82,16 @@
   font-weight: 600;
 }
 
-/* MATCHES LOGIN BUTTON SPACING */
 .registerForm {
   display: flex;
   flex-direction: column;
-  gap: 8px; 
+  gap: 8px;
 }
 
 .fieldGroup {
   position: relative;
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .inputWrapper {
@@ -146,8 +145,36 @@
   z-index: 3;
 }
 
+.validationGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 10px 0 20px 0;
+  padding: 14px;
+  background: #f9fafb;
+  border-radius: 10px;
+  border: 1px solid #f0f1f3;
+}
+
+.validationItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.invalid {
+  color: #9ca3af;
+}
+
+.valid {
+  color: #10b981;
+}
+
 .agreementWrapper {
-  margin: 10px 0 25px 0;
+  margin-bottom: 24px;
 }
 
 .checkboxContainer {
@@ -168,8 +195,8 @@
   border: 2px solid #e5e7eb;
   border-radius: 4px;
   position: relative;
-  transition: all 0.2s;
   margin-top: 2px;
+  transition: all 0.2s;
 }
 
 .checkboxContainer input:checked ~ .checkmark {
