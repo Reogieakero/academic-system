@@ -3,6 +3,7 @@
   min-height: 100vh;
   font-family: var(--font-geist-sans);
   background-color: #ffffff;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -14,14 +15,12 @@
   justify-content: space-between;
   padding: 80px 60px;
   position: relative;
-  overflow: hidden;
 }
 
 .mainIcon {
   font-size: 80px;
   font-weight: 300;
   margin-bottom: 40px;
-  z-index: 1;
 }
 
 .welcomeText h1 {
@@ -36,7 +35,6 @@
   line-height: 1.7;
   max-width: 460px;
   opacity: 0.9;
-  text-wrap: balance;
 }
 
 .sidebarFooter {
@@ -49,7 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 60px;
+  padding: 40px;
 }
 
 .formContent {
@@ -60,8 +58,7 @@
 .brandName {
   font-size: 1.5rem;
   font-weight: 800;
-  margin-bottom: 40px;
-  color: #000;
+  margin-bottom: 30px;
 }
 
 .formTitles h3 {
@@ -73,13 +70,7 @@
 .formTitles p {
   font-size: 0.9rem;
   color: #666;
-  margin-bottom: 30px;
-}
-
-.formTitles a {
-  color: #000;
-  text-decoration: underline;
-  font-weight: 600;
+  margin-bottom: 25px;
 }
 
 .registerForm {
@@ -91,7 +82,7 @@
 .fieldGroup {
   position: relative;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .inputWrapper {
@@ -103,7 +94,7 @@
 
 .fieldGroup input {
   width: 100%;
-  padding: 12px 0;
+  padding: 10px 0;
   border: none;
   border-bottom: 1px solid #e5e7eb;
   font-size: 1rem;
@@ -123,18 +114,16 @@
   transform-origin: left; 
   transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
   pointer-events: none;
-  z-index: 2;
 }
 
-.fieldGroup input:focus ~ .morphLine,
-.inputWrapper input:focus ~ .morphLine {
+.fieldGroup input:focus ~ .morphLine {
   transform: scaleX(1);
 }
 
 .iconButton {
   position: absolute;
   right: 0;
-  bottom: 12px;
+  bottom: 10px;
   background: none;
   border: none;
   cursor: pointer;
@@ -142,39 +131,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 3;
-}
-
-.validationGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin: 10px 0 20px 0;
-  padding: 14px;
-  background: #f9fafb;
-  border-radius: 10px;
-  border: 1px solid #f0f1f3;
-}
-
-.validationItem {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.invalid {
-  color: #9ca3af;
-}
-
-.valid {
-  color: #10b981;
 }
 
 .agreementWrapper {
-  margin-bottom: 24px;
+  margin: 10px 0 20px 0;
 }
 
 .checkboxContainer {
@@ -182,7 +142,6 @@
   align-items: flex-start;
   gap: 12px;
   cursor: pointer;
-  user-select: none;
 }
 
 .checkboxContainer input {
@@ -196,7 +155,6 @@
   border-radius: 4px;
   position: relative;
   margin-top: 2px;
-  transition: all 0.2s;
 }
 
 .checkboxContainer input:checked ~ .checkmark {
@@ -235,8 +193,57 @@
   cursor: pointer;
 }
 
+.toastTitle {
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.toastDescription {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.toastList {
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc;
+  display: grid;
+  gap: 6px;
+}
+
+.toastList li {
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.toastRuleMet {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.toastRuleMet::marker {
+  color: #22c55e;
+}
+
+.toastRulePending {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.toastRulePending::marker {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.toastRuleMismatch {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+.toastRuleMismatch::marker {
+  color: #fbbf24;
+}
+
 @media (max-width: 1024px) {
-  .wrapper { flex-direction: column; }
+  .wrapper { flex-direction: column; overflow: auto; }
   .sidebar { padding: 40px; flex: none; }
   .formContainer { padding: 40px 20px; }
 }

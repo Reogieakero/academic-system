@@ -1,21 +1,22 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { IoEyeOutline, IoEyeOffOutline, IoCheckmarkCircle, IoCloseCircle } from 'react-icons/io5';
+import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
+import { sileo, Toaster } from 'sileo';
 import Button from '../../../components/ui/Button';
 import Modal from '../../../components/layout/Modal';
 import styles from './register.module.css';
 
-const ValidationRow = ({ fulfilled, text }) => (
-  <div className={`${styles.validationItem} ${fulfilled ? styles.valid : styles.invalid}`}>
-    {fulfilled ? <IoCheckmarkCircle size={16} /> : <IoCloseCircle size={16} />}
-    <span>{text}</span>
-  </div>
-);
+const PASSWORD_RULES = [
+  { key: 'length', label: 'At least 8 characters' },
+  { key: 'upper', label: 'At least 1 uppercase letter' },
+  { key: 'number', label: 'At least 1 number' },
+  { key: 'special', label: 'At least 1 symbol (@, #, $, etc.)' },
+];
 
-export default function TeacherRegisterPage() {
+export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isAgreed, setIsAgreed] = useState(false);
@@ -43,10 +44,98 @@ export default function TeacherRegisterPage() {
   }, [formData.password, formData.confirmPassword]);
 
   const isPassValid = Object.values(passValidation).every(Boolean);
-  const canSubmit = isPassValid && isAgreed && formData.fullname && formData.teacherId && formData.email;
+
+  const validationRules = useMemo(() => {
+    return [
+      ...PASSWORD_RULES.map((rule) => ({
+        key: rule.key,
+        label: rule.label,
+        met: passValidation[rule.key],
+      })),
+      {
+        key: 'match',
+        label: 'Passwords must match',
+        met: passValidation.match,
+      },
+    ];
+  }, [passValidation]);
+
+  const requirementList = useMemo(() => {
+    return (
+      <ul className={styles.toastList}>
+        {validationRules.map((rule) => {
+          const isMismatch = rule.key === 'match' && Boolean(formData.confirmPassword) && !rule.met;
+          return (
+            <li
+              key={rule.key}
+              className={
+                rule.met
+                  ? styles.toastRuleMet
+                  : isMismatch
+                    ? styles.toastRuleMismatch
+                    : styles.toastRulePending
+              }
+            >
+              {rule.label}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }, [validationRules, formData.confirmPassword]);
+
+  useEffect(() => {
+    if (!formData.password) {
+      sileo.dismiss('pass-req'); 
+      return;
+    }
+
+    const unmetRules = validationRules.filter((rule) => !rule.met);
+
+    if (unmetRules.length > 0) {
+      const hasMismatch = Boolean(formData.confirmPassword) && unmetRules.some((rule) => rule.key === 'match');
+
+      sileo[hasMismatch ? 'warning' : 'info']({
+        id: 'pass-req',
+        title: 'Password requirements',
+        description: requirementList,
+        duration: 4000,
+      });
+      return;
+    }
+
+    sileo.success({
+      id: 'pass-req',
+      title: 'Security criteria met',
+      description: 'Your password is strong and ready to use.',
+      duration: 2000,
+    });
+  }, [formData.password, formData.confirmPassword, validationRules, requirementList]);
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    sileo.promise(new Promise((res) => setTimeout(res, 2000)), {
+      loading: { title: 'Verifying credentials...' },
+      success: { title: 'Welcome to OmniStudy, Professor!' },
+      error: { title: 'Registration failed. Please try again.' },
+    });
+  };
 
   return (
     <main className={styles.wrapper}>
+      <Toaster 
+        position="top-center" 
+        theme="light"
+        options={{
+          fill: '#0f172a',
+          roundness: 14,
+          styles: {
+            title: styles.toastTitle,
+            description: styles.toastDescription,
+          }
+        }}
+      />
+
       <section className={styles.sidebar}>
         <div className={styles.sidebarContent}>
           <div className={styles.mainIcon}>*</div>
@@ -67,11 +156,11 @@ export default function TeacherRegisterPage() {
           </header>
 
           <div className={styles.formTitles}>
-            <h3>Teacher Registration</h3>
+            <h3>Registration</h3>
             <p>Already have an account? <Link href="/login">Login here.</Link></p>
           </div>
           
-          <form className={styles.registerForm} onSubmit={(e) => e.preventDefault()}>
+          <form className={styles.registerForm} onSubmit={handleRegister}>
             <div className={styles.fieldGroup}>
               <input type="text" name="fullname" placeholder="Full Name" onChange={handleChange} required />
               <span className={styles.morphLine}></span>
@@ -96,11 +185,7 @@ export default function TeacherRegisterPage() {
                   onChange={handleChange}
                   required 
                 />
-                <button 
-                  type="button" 
-                  className={styles.iconButton} 
-                  onClick={() => setShowPassword(!showPassword)}
-                >
+                <button type="button" className={styles.iconButton} onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <IoEyeOffOutline size={22} /> : <IoEyeOutline size={22} />}
                 </button>
                 <span className={styles.morphLine}></span>
@@ -116,23 +201,11 @@ export default function TeacherRegisterPage() {
                   onChange={handleChange}
                   required 
                 />
-                <button 
-                  type="button" 
-                  className={styles.iconButton} 
-                  onClick={() => setShowPassword(!showPassword)}
-                >
+                <button type="button" className={styles.iconButton} onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? <IoEyeOffOutline size={22} /> : <IoEyeOutline size={22} />}
                 </button>
                 <span className={styles.morphLine}></span>
               </div>
-            </div>
-
-            <div className={styles.validationGrid}>
-              <ValidationRow fulfilled={passValidation.length} text="8+ Characters" />
-              <ValidationRow fulfilled={passValidation.upper} text="Uppercase" />
-              <ValidationRow fulfilled={passValidation.number} text="Number" />
-              <ValidationRow fulfilled={passValidation.special} text="Symbol" />
-              <ValidationRow fulfilled={passValidation.match} text="Passwords Match" />
             </div>
 
             <div className={styles.agreementWrapper}>
@@ -145,7 +218,7 @@ export default function TeacherRegisterPage() {
               </label>
             </div>
 
-            <Button type="submit" variant="primary" disabled={!canSubmit}>
+            <Button type="submit" variant="primary" disabled={!isPassValid || !isAgreed}>
               Register Now
             </Button>
 
@@ -153,7 +226,7 @@ export default function TeacherRegisterPage() {
               variant="secondary" 
               icon={<Image src="https://www.google.com/images/branding/product/2x/googleg_16dp.png" alt="G" width={16} height={16} />}
             >
-              Sign up with Google Workspace
+              Sign up with Google
             </Button>
           </form>
         </div>
