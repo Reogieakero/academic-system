@@ -84,3 +84,13 @@
 .btn:active {
   transform: scale(0.98);
 }
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed !important;
+  background-color: #999 !important;
+}
+
+.disabled .overlay {
+  display: none;
+}

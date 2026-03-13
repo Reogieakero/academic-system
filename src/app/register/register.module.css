@@ -1,0 +1,215 @@
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  font-family: var(--font-geist-sans);
+  background-color: #ffffff;
+}
+
+.sidebar {
+  flex: 1.2;
+  background-color: #1a16cf;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mainIcon {
+  font-size: 80px;
+  font-weight: 300;
+  margin-bottom: 40px;
+  z-index: 1;
+}
+
+.welcomeText h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: -0.04em;
+}
+
+.welcomeText p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 460px;
+  opacity: 0.9;
+  text-wrap: balance;
+}
+
+.sidebarFooter {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.formContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+}
+
+.formContent {
+  width: 100%;
+  max-width: 400px;
+}
+
+.brandName {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+  color: #000;
+}
+
+.formTitles h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.formTitles p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.formTitles a {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* MATCHES LOGIN BUTTON SPACING */
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+}
+
+.fieldGroup {
+  position: relative;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.fieldGroup input {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1rem;
+  background: transparent;
+  outline: none;
+  color: #000;
+}
+
+.morphLine {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  transform: scaleX(0);
+  transform-origin: left; 
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fieldGroup input:focus ~ .morphLine,
+.inputWrapper input:focus ~ .morphLine {
+  transform: scaleX(1);
+}
+
+.iconButton {
+  position: absolute;
+  right: 0;
+  bottom: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.agreementWrapper {
+  margin: 10px 0 25px 0;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkboxContainer input {
+  display: none;
+}
+
+.checkmark {
+  min-width: 18px;
+  height: 18px;
+  border: 2px solid #e5e7eb;
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s;
+  margin-top: 2px;
+}
+
+.checkboxContainer input:checked ~ .checkmark {
+  background-color: #000;
+  border-color: #000;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkboxContainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkboxContainer p {
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.link {
+  color: #000;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .wrapper { flex-direction: column; }
+  .sidebar { padding: 40px; flex: none; }
+  .formContainer { padding: 40px 20px; }
+}
