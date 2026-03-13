@@ -3,7 +3,6 @@ export const INITIAL_REGISTER_FORM_DATA = {
   middleName: '',
   lastName: '',
   suffix: '',
-  teacherId: '',
   email: '',
   password: '',
   confirmPassword: '',

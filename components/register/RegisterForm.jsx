@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import Button from '../ui/Button';
 import SelectField from '../ui/SelectField';
 import PasswordInputField from './PasswordInputField';
@@ -78,18 +77,6 @@ export default function RegisterForm({
 
         <div className={styles.fieldGroup}>
           <input
-            type="text"
-            name="teacherId"
-            placeholder="Teacher ID / Employee No."
-            value={formData.teacherId}
-            onChange={handleChange}
-            required
-          />
-          <span className={styles.morphLine}></span>
-        </div>
-
-        <div className={styles.fieldGroup}>
-          <input
             type="email"
             name="email"
             placeholder="Institutional Email"
@@ -132,13 +119,6 @@ export default function RegisterForm({
 
         <Button type="submit" variant="primary" disabled={!isPassValid || !isAgreed}>
           Register Now
-        </Button>
-
-        <Button
-          variant="secondary"
-          icon={<Image src="https://www.google.com/images/branding/product/2x/googleg_16dp.png" alt="G" width={16} height={16} />}
-        >
-          Sign up with Google
         </Button>
       </form>
     </div>

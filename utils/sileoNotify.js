@@ -70,8 +70,24 @@ export function showPasswordSuccessToast() {
 
 export function showRegisterPromiseToast(promise) {
   return showPromiseToast(promise, {
-    loading: { title: 'Verifying credentials...' },
-    success: { title: 'Welcome to OmniStudy, Professor!' },
+    loading: { title: 'Creating your account...' },
+    success: { title: 'Account created. Check your email to confirm sign in.' },
     error: { title: 'Registration failed. Please try again.' },
+  });
+}
+
+export function showVerifyPromiseToast(promise) {
+  return showPromiseToast(promise, {
+    loading: { title: 'Verifying your code...' },
+    success: { title: 'Email verified! Redirecting to login...' },
+    error: { title: 'Invalid or expired code. Please try again.' },
+  });
+}
+
+export function showLoginPromiseToast(promise) {
+  return showPromiseToast(promise, {
+    loading: { title: 'Signing you in...' },
+    success: { title: 'Welcome back!' },
+    error: { title: 'Login failed. Check your credentials and try again.' },
   });
 }

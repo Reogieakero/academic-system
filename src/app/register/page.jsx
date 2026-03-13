@@ -2,18 +2,22 @@
 
 import React, { useState } from 'react';
 import { SileoNotification } from '../../../components/ui/SileoNotification';
-import { showRegisterPromiseToast } from '../../../utils/sileoNotify';
 import Modal from '../../../components/layout/Modal';
 import RegisterForm from '../../../components/register/RegisterForm';
 import RegisterSidebar from '../../../components/register/RegisterSidebar';
 import { INITIAL_REGISTER_FORM_DATA, SUFFIX_OPTIONS } from '../../../constants/register.constants';
 import useRegisterPasswordValidation from '../../../hooks/useRegisterPasswordValidation';
+import useRegisterAuth from '../../../hooks/useRegisterAuth';
+import { showRegisterPromiseToast, showVerifyPromiseToast } from '../../../utils/sileoNotify';
+import VerifyOtpModal from '../../../components/register/VerifyOtpModal';
 import styles from './register.module.css';
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [modalType, setModalType] = useState(null);
   const [isAgreed, setIsAgreed] = useState(false);
+  const [pendingEmail, setPendingEmail] = useState(null);
+  const { registerWithEmail, verifySignupCode } = useRegisterAuth();
 
   const [formData, setFormData] = useState(INITIAL_REGISTER_FORM_DATA);
 
@@ -25,7 +29,27 @@ export default function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    showRegisterPromiseToast(new Promise((res) => setTimeout(res, 2000)));
+
+    const registerPromise = registerWithEmail(formData).then(() => {
+      setPendingEmail(formData.email.trim());
+      setFormData(INITIAL_REGISTER_FORM_DATA);
+      setIsAgreed(false);
+      setShowPassword(false);
+    });
+
+    showRegisterPromiseToast(registerPromise).catch(() => {});
+  };
+
+  const handleVerify = (token, resetDigits) => {
+    const verifyPromise = verifySignupCode({ email: pendingEmail, token }).then(() => {
+      setPendingEmail(null);
+    });
+
+    verifyPromise.catch(() => {
+      resetDigits();
+    });
+
+    showVerifyPromiseToast(verifyPromise).catch(() => {});
   };
 
   return (
@@ -55,6 +79,12 @@ export default function Register() {
           }))}
         />
       </section>
+
+      <VerifyOtpModal
+        isOpen={!!pendingEmail}
+        email={pendingEmail}
+        onVerify={handleVerify}
+      />
 
       <Modal isOpen={!!modalType} onClose={() => setModalType(null)} title={modalType === 'guidelines' ? "Faculty Guidelines" : "Privacy Policy"}>
         <p>OmniStudy ensures the highest standard of data protection for faculty members.</p>

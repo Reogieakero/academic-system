@@ -2,17 +2,34 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import Button from '../../../components/ui/Button';
+import { SileoNotification } from '../../../components/ui/SileoNotification';
+import useLoginAuth from '../../../hooks/useLoginAuth';
+import { showLoginPromiseToast } from '../../../utils/sileoNotify';
 import styles from './login.module.css';
 
 
 export default function LoginPage() {
+  const { loginWithEmail } = useLoginAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({ email: '', password: '' });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const loginPromise = loginWithEmail(formData);
+
+    showLoginPromiseToast(loginPromise).catch(() => {});
+  };
 
   return (
     <main className={styles.wrapper}>
+        <SileoNotification />
       <section className={styles.sidebar}>
         <div className={styles.sidebarContent}>
           <div className={styles.mainIcon}>*</div>
@@ -43,9 +60,16 @@ export default function LoginPage() {
             </p>
           </div>
           
-          <form className={styles.loginForm}>
+          <form className={styles.loginForm} onSubmit={handleLogin}>
             <div className={styles.fieldGroup}>
-              <input type="email" name="email" placeholder="Email" required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
               <span className={styles.morphLine}></span>
             </div>
             
@@ -54,7 +78,9 @@ export default function LoginPage() {
                 <input 
                   type={showPassword ? "text" : "password"} 
                   name="password" 
-                  placeholder="Password" 
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
                   required 
                 />
                 <button 
@@ -70,13 +96,6 @@ export default function LoginPage() {
 
             <Button type="submit" variant="primary">
               Login Now
-            </Button>
-
-            <Button 
-              variant="secondary" 
-              icon={<Image src="https://www.google.com/images/branding/product/2x/googleg_16dp.png" alt="Google" width={16} height={16} />}
-            >
-              Login with Google
             </Button>
           </form>
 
