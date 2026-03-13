@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
+import Button from '../../../components/ui/Button';
 import styles from './login.module.css';
 
 
@@ -16,7 +17,7 @@ export default function LoginPage() {
         <div className={styles.sidebarContent}>
           <div className={styles.mainIcon}>*</div>
           <div className={styles.welcomeText}>
-            <h1>OmniStudy !</h1> 
+            <h1>OmniStudy !</h1>
             <p>
               Your secure gateway to academic integrity and student success. 
               Stay connected, access your records, and move forward with confidence 
@@ -67,17 +68,16 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <button type="submit" className={styles.primaryButton}>Login Now</button>
+            <Button type="submit" variant="primary">
+              Login Now
+            </Button>
 
-            <button type="button" className={styles.secondaryButton}>
-              <Image 
-                src="https://www.google.com/images/branding/product/2x/googleg_16dp.png" 
-                alt="Google" 
-                width={16} 
-                height={16} 
-              />
+            <Button 
+              variant="secondary" 
+              icon={<Image src="https://www.google.com/images/branding/product/2x/googleg_16dp.png" alt="Google" width={16} height={16} />}
+            >
               Login with Google
-            </button>
+            </Button>
           </form>
 
           <footer className={styles.formFooter}>
