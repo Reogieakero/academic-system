@@ -1,10 +1,15 @@
 export const INITIAL_REGISTER_FORM_DATA = {
-  fullname: '',
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  suffix: '',
   teacherId: '',
   email: '',
   password: '',
   confirmPassword: '',
 };
+
+export const SUFFIX_OPTIONS = ['', 'Jr.', 'Sr.', 'II', 'III', 'IV', 'V'];
 
 export const PASSWORD_RULES = [
   { key: 'length', label: 'At least 8 characters' },

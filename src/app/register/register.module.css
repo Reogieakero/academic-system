@@ -1,13 +1,13 @@
 .wrapper {
   display: flex;
-  min-height: 100vh;
+  height: 100dvh;
   font-family: var(--font-geist-sans);
   background-color: #ffffff;
   overflow: hidden;
 }
 
 .sidebar {
-  flex: 1.2;
+  flex: 1.2 1 0;
   background-color: #1a16cf;
   color: white;
   display: flex;
@@ -15,6 +15,7 @@
   justify-content: space-between;
   padding: 80px 60px;
   position: relative;
+  min-height: 0;
 }
 
 .mainIcon {
@@ -43,22 +44,26 @@
 }
 
 .formContainer {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 40px 60px;
+  overflow: hidden;
 }
 
 .formContent {
   width: 100%;
   max-width: 400px;
+  max-height: 100%;
 }
 
 .brandName {
   font-size: 1.5rem;
   font-weight: 800;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .formTitles h3 {
@@ -70,19 +75,35 @@
 .formTitles p {
   font-size: 0.9rem;
   color: #666;
-  margin-bottom: 25px;
+  margin-bottom: 18px;
+}
+
+.formTitles a {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 600;
 }
 
 .registerForm {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
+}
+
+.nameGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.selectGridItem {
+  margin-bottom: 15px;
 }
 
 .fieldGroup {
   position: relative;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .inputWrapper {
@@ -92,7 +113,8 @@
   width: 100%;
 }
 
-.fieldGroup input {
+.fieldGroup input,
+.inputWrapper input {
   width: 100%;
   padding: 10px 0;
   border: none;
@@ -116,7 +138,8 @@
   pointer-events: none;
 }
 
-.fieldGroup input:focus ~ .morphLine {
+.fieldGroup input:focus ~ .morphLine,
+.inputWrapper input:focus ~ .morphLine {
   transform: scaleX(1);
 }
 
@@ -134,7 +157,7 @@
 }
 
 .agreementWrapper {
-  margin: 10px 0 20px 0;
+  margin: 6px 0 14px 0;
 }
 
 .checkboxContainer {
@@ -243,7 +266,14 @@
 }
 
 @media (max-width: 1024px) {
-  .wrapper { flex-direction: column; overflow: auto; }
+  .wrapper { height: auto; min-height: 100dvh; flex-direction: column; overflow: auto; }
   .sidebar { padding: 40px; flex: none; }
   .formContainer { padding: 40px 20px; }
+}
+
+@media (max-width: 600px) {
+  .nameGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 }

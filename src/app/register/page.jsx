@@ -1,15 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import Button from '../../../components/ui/Button';
 import { SileoNotification } from '../../../components/ui/SileoNotification';
 import { showRegisterPromiseToast } from '../../../utils/sileoNotify';
 import Modal from '../../../components/layout/Modal';
+import RegisterForm from '../../../components/register/RegisterForm';
 import RegisterSidebar from '../../../components/register/RegisterSidebar';
-import PasswordInputField from '../../../components/register/PasswordInputField';
-import { INITIAL_REGISTER_FORM_DATA } from '../../../constants/register.constants';
+import { INITIAL_REGISTER_FORM_DATA, SUFFIX_OPTIONS } from '../../../constants/register.constants';
 import useRegisterPasswordValidation from '../../../hooks/useRegisterPasswordValidation';
 import styles from './register.module.css';
 
@@ -41,72 +38,22 @@ export default function Register() {
       <RegisterSidebar styles={styles} />
 
       <section className={styles.formContainer}>
-        <div className={styles.formContent}>
-          <header className={styles.formHeader}>
-            <h2 className={styles.brandName}>OmniStudy</h2>
-          </header>
-
-          <div className={styles.formTitles}>
-            <h3>Registration</h3>
-            <p>Already have an account? <Link href="/login">Login here.</Link></p>
-          </div>
-          
-          <form className={styles.registerForm} onSubmit={handleRegister}>
-            <div className={styles.fieldGroup}>
-              <input type="text" name="fullname" placeholder="Full Name" onChange={handleChange} required />
-              <span className={styles.morphLine}></span>
-            </div>
-
-            <div className={styles.fieldGroup}>
-              <input type="text" name="teacherId" placeholder="Teacher ID / Employee No." onChange={handleChange} required />
-              <span className={styles.morphLine}></span>
-            </div>
-
-            <div className={styles.fieldGroup}>
-              <input type="email" name="email" placeholder="Institutional Email" onChange={handleChange} required />
-              <span className={styles.morphLine}></span>
-            </div>
-            
-            <PasswordInputField
-              name="password"
-              placeholder="Create Password"
-              showPassword={showPassword}
-              onChange={handleChange}
-              onToggle={() => setShowPassword(!showPassword)}
-              styles={styles}
-            />
-
-            <PasswordInputField
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              showPassword={showPassword}
-              onChange={handleChange}
-              onToggle={() => setShowPassword(!showPassword)}
-              styles={styles}
-            />
-
-            <div className={styles.agreementWrapper}>
-              <label className={styles.checkboxContainer}>
-                <input type="checkbox" checked={isAgreed} onChange={(e) => setIsAgreed(e.target.checked)} />
-                <span className={styles.checkmark}></span>
-                <p>
-                  I agree to the <span className={styles.link} onClick={() => setModalType('guidelines')}>Guidelines</span> and <span className={styles.link} onClick={() => setModalType('privacy')}>Privacy Policy</span>.
-                </p>
-              </label>
-            </div>
-
-            <Button type="submit" variant="primary" disabled={!isPassValid || !isAgreed}>
-              Register Now
-            </Button>
-
-            <Button 
-              variant="secondary" 
-              icon={<Image src="https://www.google.com/images/branding/product/2x/googleg_16dp.png" alt="G" width={16} height={16} />}
-            >
-              Sign up with Google
-            </Button>
-          </form>
-        </div>
+        <RegisterForm
+          formData={formData}
+          handleChange={handleChange}
+          handleRegister={handleRegister}
+          isAgreed={isAgreed}
+          isPassValid={isPassValid}
+          setIsAgreed={setIsAgreed}
+          setModalType={setModalType}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+          styles={styles}
+          suffixOptions={SUFFIX_OPTIONS.map((option) => ({
+            value: option,
+            label: option || 'None',
+          }))}
+        />
       </section>
 
       <Modal isOpen={!!modalType} onClose={() => setModalType(null)} title={modalType === 'guidelines' ? "Faculty Guidelines" : "Privacy Policy"}>

@@ -6,7 +6,7 @@
 }
 
 .sidebar {
-  flex: 1.2;
+  flex: 1.2 1 0;
   background-color: #1a16cf;
   color: white;
   display: flex;
@@ -56,7 +56,8 @@
 }
 
 .formContainer {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;

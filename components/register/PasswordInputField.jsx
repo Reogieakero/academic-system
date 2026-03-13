@@ -4,6 +4,7 @@ export default function PasswordInputField({
   name,
   placeholder,
   showPassword,
+  value,
   onChange,
   onToggle,
   styles,
@@ -15,6 +16,7 @@ export default function PasswordInputField({
           type={showPassword ? 'text' : 'password'}
           name={name}
           placeholder={placeholder}
+          value={value}
           onChange={onChange}
           required
         />
