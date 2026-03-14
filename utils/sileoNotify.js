@@ -88,6 +88,6 @@ export function showLoginPromiseToast(promise) {
   return showPromiseToast(promise, {
     loading: { title: 'Signing you in...' },
     success: { title: 'Welcome back!' },
-    error: { title: 'Login failed. Check your credentials and try again.' },
+    error: (err) => ({ title: err?.message || 'Login failed. Check your credentials and try again.' }),
   });
 }
