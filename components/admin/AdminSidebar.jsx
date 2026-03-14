@@ -26,7 +26,9 @@ export default function AdminSidebar({
   };
 
   return (
-    <div className={styles.sidebarShell}>
+    <div
+      className={`${styles.sidebarShell} ${collapsed ? styles.shellCollapsed : ''}`}
+    >
       <aside
         className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''}`}
         onClick={handleSidebarClick}
