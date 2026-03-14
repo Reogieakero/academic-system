@@ -115,6 +115,12 @@
   color: #64748b;
 }
 
+.createdAtCell {
+  color: #64748b;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
 .userIdCell {
   display: flex;
   align-items: center;

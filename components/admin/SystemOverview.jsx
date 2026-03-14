@@ -18,7 +18,7 @@ export default function SystemOverview({ pageLoading, stats }) {
   return (
     <section className={styles.overviewSection}>
       <div className={styles.statsGrid}>
-        <div className={styles.statCard}>
+        <div className={`${styles.statCard} ${styles.statCardUsers}`}>
           <div className={styles.statCardHeader}>
             <p className={styles.statLabel}>Total Users</p>
             <div className={`${styles.statIcon} ${styles.iconBlue}`}>
@@ -28,7 +28,7 @@ export default function SystemOverview({ pageLoading, stats }) {
           <p className={styles.statValue}>{stats?.total ?? 0}</p>
         </div>
 
-        <div className={styles.statCard}>
+        <div className={`${styles.statCard} ${styles.statCardPending}`}>
           <div className={styles.statCardHeader}>
             <p className={styles.statLabel}>Pending Approvals</p>
             <div className={`${styles.statIcon} ${styles.iconAmber}`}>
@@ -38,7 +38,7 @@ export default function SystemOverview({ pageLoading, stats }) {
           <p className={styles.statValue}>{stats?.pending ?? 0}</p>
         </div>
 
-        <div className={styles.statCard}>
+        <div className={`${styles.statCard} ${styles.statCardApproved}`}>
           <div className={styles.statCardHeader}>
             <p className={styles.statLabel}>Approved Users</p>
             <div className={`${styles.statIcon} ${styles.iconGreen}`}>

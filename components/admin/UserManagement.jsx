@@ -6,6 +6,7 @@ import {
   IoPersonAdd, 
   IoCopyOutline,
   IoMailOutline, 
+  IoCalendarOutline,
   IoShieldCheckmarkOutline, 
   IoToggleOutline, 
   IoGridOutline 
@@ -24,6 +25,25 @@ export default function UserManagement({
   userFilter,
   userStatusCounts,
 }) {
+  const formatCreatedAt = (value) => {
+    if (!value) {
+      return '—';
+    }
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return '—';
+    }
+
+    return new Intl.DateTimeFormat(undefined, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    }).format(date);
+  };
+
   const fallbackCopy = (value) => {
     const textArea = document.createElement('textarea');
     textArea.value = value;
@@ -90,6 +110,7 @@ export default function UserManagement({
             <thead>
               <tr>
                 <th><div className={styles.thContent}><IoCopyOutline size={14}/> User ID</div></th>
+                <th><div className={styles.thContent}><IoCalendarOutline size={14}/> Created At</div></th>
                 <th><div className={styles.thContent}><IoPersonAdd size={14}/> Name</div></th>
                 <th><div className={styles.thContent}><IoMailOutline size={14}/> Email</div></th>
                 <th><div className={styles.thContent}><IoShieldCheckmarkOutline size={14}/> Role</div></th>
@@ -113,6 +134,7 @@ export default function UserManagement({
                       </button>
                     </div>
                   </td>
+                  <td className={styles.createdAtCell}>{formatCreatedAt(user.created_at)}</td>
                   <td>
                     <div className={styles.nameCell}>
                       <div className={styles.avatarPlaceholder}>
