@@ -18,7 +18,13 @@ export default function useRegisterAuth() {
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Registration failed');
+    if (!res.ok) {
+      const error = new Error(data.error || 'Registration failed');
+      error.code = data.code;
+      error.status = res.status;
+      error.retryAfterSeconds = data.retryAfterSeconds;
+      throw error;
+    }
     return data;
   };
 

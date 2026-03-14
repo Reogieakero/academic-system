@@ -1,4 +1,5 @@
 import { sileo } from 'sileo';
+import RateLimitToastBody from '../components/register/RateLimitToastBody';
 
 export const PASSWORD_TOAST_ID = 'pass-req';
 
@@ -72,7 +73,17 @@ export function showRegisterPromiseToast(promise) {
   return showPromiseToast(promise, {
     loading: { title: 'Creating your account...' },
     success: { title: 'Account created. Check your email to confirm sign in.' },
-    error: (err) => ({ title: err?.message || 'Registration failed. Please try again.' }),
+    error: (err) => {
+      if (err?.code === 'over_email_send_rate_limit' || err?.status === 429) {
+        return {
+          title: 'Email rate limit reached',
+          description: <RateLimitToastBody initialSeconds={Number(err?.retryAfterSeconds) || 60} />,
+          duration: 7000,
+        };
+      }
+
+      return { title: err?.message || 'Registration failed. Please try again.' };
+    },
   });
 }
 

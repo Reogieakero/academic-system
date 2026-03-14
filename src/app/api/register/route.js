@@ -18,7 +18,25 @@ export async function POST(request) {
 
   if (error) {
     console.error('Supabase signUp error:', error);
-    return Response.json({ error: error.message }, { status: 400 });
+
+    if (error.code === 'over_email_send_rate_limit') {
+      return Response.json(
+        {
+          error: 'Too many email requests. Please wait before requesting another verification code.',
+          code: error.code,
+          retryAfterSeconds: 60,
+        },
+        { status: 429 }
+      );
+    }
+
+    return Response.json(
+      {
+        error: error.message,
+        code: error.code || 'registration_failed',
+      },
+      { status: error.status || 400 }
+    );
   }
 
   return Response.json({ success: true });
