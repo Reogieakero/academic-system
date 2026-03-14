@@ -1,14 +1,14 @@
 .usersSection {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 20px;
 }
 
 .filterTabs {
   display: flex;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid #dde5d9;
   border-radius: 8px;
-  background: var(--color-white);
+  background: #fff;
   width: fit-content;
   overflow: hidden;
 }
@@ -16,54 +16,43 @@
 .filterTab {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 16px;
+  gap: 8px;
+  padding: 8px 20px;
   border: none;
-  border-right: 1px solid var(--color-border-subtle);
+  border-right: 1px solid #dde5d9;
   background: none;
-  font-size: 0.79rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  color: var(--color-text-muted);
+  color: #64748b;
   cursor: pointer;
-  transition: background 0.12s, color 0.12s;
 }
 
 .filterTab:last-child {
   border-right: none;
 }
 
-.filterTab:hover {
-  background: var(--color-page-bg);
-  color: var(--color-black);
-}
-
 .filterTabActive {
-  background: var(--color-black);
-  color: var(--color-white);
-}
-
-.filterTabActive:hover {
-  background: var(--color-neutral-900-soft);
-  color: var(--color-white);
+  background: #1e293b;
+  color: #fff;
 }
 
 .filterCount {
-  font-size: 0.69rem;
-  font-weight: 600;
-  background: var(--color-overlay-black-07);
-  border-radius: 999px;
-  padding: 1px 6px;
+  font-size: 0.7rem;
+  background: rgba(0,0,0,0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
 }
 
 .filterTabActive .filterCount {
-  background: var(--color-overlay-white-18);
+  background: rgba(255,255,255,0.2);
 }
 
 .tableWrapper {
-  background: var(--color-white);
-  border: 1px solid var(--color-border-soft);
-  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 
 .table {
@@ -72,133 +61,194 @@
 }
 
 .table th {
-  padding: 10px 18px;
+  padding: 14px 20px;
+  background: #f8fafc;
   text-align: left;
-  font-size: 0.7rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.thContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--color-text-quiet);
+  color: #64748b;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
-  background: var(--color-surface-muted);
-  border-bottom: 1px solid var(--color-border-table-head);
+  letter-spacing: 0.02em;
 }
 
 .table td {
-  padding: 13px 18px;
-  font-size: 0.84rem;
-  color: var(--color-text-body);
-  border-bottom: 1px solid var(--color-border-table-row);
+  padding: 16px 20px;
+  font-size: 0.88rem;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
 }
 
-.table tr:last-child td {
-  border-bottom: none;
+.table tr:hover {
+  background: #fbfcfd;
 }
 
-.table tbody tr:hover {
-  background: var(--color-surface-muted);
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.avatarPlaceholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
 }
 
 .emailCell {
-  color: var(--color-text-disabled) !important;
-  font-size: 0.81rem !important;
+  color: #64748b;
+}
+
+.userIdCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 230px;
+}
+
+.userIdText {
+  display: inline-block;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.copyIdButton {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #dbe4ee;
+  background: #fff;
+  color: #64748b;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.copyIdButton:hover {
+  border-color: #93c5fd;
+  color: #1d4ed8;
+  background: #eff6ff;
 }
 
 .roleBadge {
-  display: inline-block;
-  padding: 2px 9px;
-  border-radius: 999px;
-  background: var(--color-indigo-50);
-  color: var(--color-indigo-500);
-  font-size: 0.71rem;
-  font-weight: 600;
+  padding: 3px 10px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
   text-transform: capitalize;
-  border: 1px solid var(--color-indigo-100);
 }
 
 .statusBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 9px;
+  padding: 4px 12px;
   border-radius: 999px;
-  font-size: 0.71rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: capitalize;
 }
 
-.status_pending {
-  background: var(--color-amber-50);
-  color: var(--color-amber-700);
-  border: 1px solid var(--color-amber-100);
+.status_pending { background: #fff7ed; color: #9a3412; }
+.status_approved { background: #ecfdf5; color: #065f46; }
+
+.rejectedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff1f2;
+  color: #be123c;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
-.status_approved {
-  background: var(--color-emerald-50);
-  color: var(--color-emerald-700);
-  border: 1px solid var(--color-emerald-100);
-}
-
-.status_rejected {
-  background: var(--color-rose-50);
-  color: var(--color-rose-700);
-  border: 1px solid var(--color-rose-100);
+.badgeIconWrapper {
+  background: #be123c;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  padding: 2px;
 }
 
 .actionBtns {
   display: flex;
-  gap: 6px;
-}
-
-.approveBtn,
-.rejectBtn {
-  display: inline-flex;
   align-items: center;
-  gap: 4px;
-  padding: 5px 12px;
-  border-radius: 6px;
-  font-size: 0.77rem;
-  font-weight: 500;
+  gap: 8px;
+}
+
+.approveBtnInspo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #2d5a57;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.12s;
+  transition: opacity 0.2s;
 }
 
-.approveBtn {
-  background: var(--color-emerald-50);
-  color: var(--color-emerald-700);
-  border: 1px solid var(--color-emerald-100);
+.approveBtnInspo:hover {
+  opacity: 0.9;
 }
 
-.approveBtn:hover {
-  background: var(--color-emerald-200);
-}
-
-.rejectBtn {
-  background: var(--color-rose-50);
-  color: var(--color-rose-700);
-  border: 1px solid var(--color-rose-100);
-}
-
-.rejectBtn:hover {
-  background: var(--color-rose-200);
-}
-
-.tableLoading {
+.rejectIconButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 56px;
-  background: var(--color-white);
+  width: 34px;
+  height: 34px;
+  background: #fff;
+  border: 1px solid #fee2e2;
+  color: #ef4444;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.emptyState {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  padding: 56px;
-  background: var(--color-white);
-  border: 1px solid var(--color-border-soft);
-  border-radius: 10px;
-  color: var(--color-text-empty);
-  font-size: 0.85rem;
+.rejectIconButton:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.statusPlaceholder {
+  color: #cbd5e1;
+  padding-left: 12px;
+}
+
+.tableLoading, .emptyState {
+  padding: 60px;
+  text-align: center;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
