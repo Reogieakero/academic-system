@@ -72,7 +72,7 @@ export function showRegisterPromiseToast(promise) {
   return showPromiseToast(promise, {
     loading: { title: 'Creating your account...' },
     success: { title: 'Account created. Check your email to confirm sign in.' },
-    error: { title: 'Registration failed. Please try again.' },
+    error: (err) => ({ title: err?.message || 'Registration failed. Please try again.' }),
   });
 }
 

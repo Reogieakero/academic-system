@@ -1,0 +1,75 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  font-family: var(--font-geist-sans);
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.bodyRow {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.loadingScreen {
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid #e2e2e2;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 22px 34px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e6ebe2;
+}
+
+.headerTitleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.breadcrumb {
+  margin: 0;
+  font-size: 0.74rem;
+  color: #92a196;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 1.38rem;
+  font-weight: 700;
+  color: #1f2e24;
+  letter-spacing: -0.02em;
+}

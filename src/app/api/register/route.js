@@ -4,8 +4,6 @@ import { supabaseAdmin } from '../../../../utils/supabaseAdmin';
 export async function POST(request) {
   const { email, password, firstName, middleName, lastName, suffix } = await request.json();
 
-  const origin = new URL(request.url).origin;
-
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -16,11 +14,11 @@ export async function POST(request) {
         last_name: lastName,
         suffix,
       },
-      emailRedirectTo: `${origin}/login`,
     },
   });
 
   if (error) {
+    console.error('Supabase signUp error:', error);
     return Response.json({ error: error.message }, { status: 400 });
   }
 
