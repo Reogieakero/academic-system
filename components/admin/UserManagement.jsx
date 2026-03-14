@@ -2,6 +2,7 @@
 
 import { IoCheckmark, IoClose, IoPersonAdd } from 'react-icons/io5';
 import { ADMIN_USER_FILTERS } from '../../constants/admin.constants';
+import LoadingState from '../ui/LoadingState';
 import styles from './UserManagement.module.css';
 
 export default function UserManagement({
@@ -32,7 +33,7 @@ export default function UserManagement({
 
       {pageLoading ? (
         <div className={styles.tableLoading}>
-          <div className={styles.spinner} />
+          <LoadingState size="md" label="Loading users" />
         </div>
       ) : filteredUsers.length === 0 ? (
         <div className={styles.emptyState}>

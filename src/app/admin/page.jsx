@@ -4,6 +4,7 @@ import AdminSidebar from '../../../components/admin/AdminSidebar';
 import AdminTopNav from '../../../components/admin/AdminTopNav';
 import SystemOverview from '../../../components/admin/SystemOverview';
 import UserManagement from '../../../components/admin/UserManagement';
+import LoadingState from '../../../components/ui/LoadingState';
 import useAdminDashboard from '../../../hooks/useAdminDashboard';
 import styles from './admin.module.css';
 
@@ -28,11 +29,7 @@ export default function AdminPage() {
   } = useAdminDashboard();
 
   if (loading) {
-    return (
-      <div className={styles.loadingScreen}>
-        <div className={styles.spinner} />
-      </div>
-    );
+    return <LoadingState fullScreen label="Loading admin dashboard" />;
   }
 
   return (

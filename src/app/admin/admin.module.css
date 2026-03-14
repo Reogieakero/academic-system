@@ -16,29 +16,6 @@
   min-height: 0;
 }
 
-.loadingScreen {
-  height: 100dvh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-surface-subtle);
-}
-
-.spinner {
-  width: 28px;
-  height: 28px;
-  border: 2.5px solid var(--color-border-spinner);
-  border-top-color: var(--color-indigo-500);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .main {
   flex: 1;
   min-width: 0;

@@ -190,21 +190,6 @@
   background: var(--color-white);
 }
 
-.spinner {
-  width: 28px;
-  height: 28px;
-  border: 2.5px solid var(--color-border-spinner);
-  border-top-color: var(--color-indigo-500);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .emptyState {
   display: flex;
   flex-direction: column;

@@ -1,9 +1,20 @@
 'use client';
 
 import { IoPeople, IoShieldCheckmark, IoTime } from 'react-icons/io5';
+import LoadingState from '../ui/LoadingState';
 import styles from './SystemOverview.module.css';
 
 export default function SystemOverview({ pageLoading, stats }) {
+  if (pageLoading) {
+    return (
+      <section className={styles.overviewSection}>
+        <div className={styles.loadingWrap}>
+          <LoadingState size="md" label="Loading overview" />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.overviewSection}>
       <div className={styles.statsGrid}>
@@ -14,7 +25,7 @@ export default function SystemOverview({ pageLoading, stats }) {
               <IoPeople size={15} />
             </div>
           </div>
-          <p className={styles.statValue}>{pageLoading ? '—' : (stats?.total ?? 0)}</p>
+          <p className={styles.statValue}>{stats?.total ?? 0}</p>
         </div>
 
         <div className={styles.statCard}>
@@ -24,7 +35,7 @@ export default function SystemOverview({ pageLoading, stats }) {
               <IoTime size={15} />
             </div>
           </div>
-          <p className={styles.statValue}>{pageLoading ? '—' : (stats?.pending ?? 0)}</p>
+          <p className={styles.statValue}>{stats?.pending ?? 0}</p>
         </div>
 
         <div className={styles.statCard}>
@@ -34,7 +45,7 @@ export default function SystemOverview({ pageLoading, stats }) {
               <IoShieldCheckmark size={15} />
             </div>
           </div>
-          <p className={styles.statValue}>{pageLoading ? '—' : (stats?.approved ?? 0)}</p>
+          <p className={styles.statValue}>{stats?.approved ?? 0}</p>
         </div>
       </div>
     </section>

@@ -4,6 +4,16 @@
   gap: 16px;
 }
 
+.loadingWrap {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-soft);
+  border-radius: 10px;
+  background: var(--color-white);
+}
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
