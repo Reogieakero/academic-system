@@ -18,6 +18,10 @@ export async function POST(request) {
     return Response.json({ error: 'Verification succeeded but user data is missing.' }, { status: 500 });
   }
 
+  if (!data.user.email_confirmed_at) {
+    return Response.json({ error: 'Email is not confirmed yet.' }, { status: 400 });
+  }
+
   const metadata = data.user.user_metadata || {};
   const { error: profileError } = await supabaseAdmin
     .from('profiles')
