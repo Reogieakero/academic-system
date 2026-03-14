@@ -18,7 +18,9 @@ export default function useLoginAuth() {
     if (!res.ok) throw new Error(data.error || 'Login failed');
 
     await supabase.auth.setSession(data.session);
-    router.push('/home');
+
+    const targetPath = data.redirectPath || '/';
+    router.push(targetPath);
 
     return data;
   };

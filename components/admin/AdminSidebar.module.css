@@ -14,13 +14,13 @@
 }
 
 .sidebar {
-  --sidebar-bg: #f5f7f2;
-  --sidebar-border: #e4e9df;
-  --sidebar-foreground: #223127;
-  --sidebar-muted: #8a968b;
-  --sidebar-active-bg: #dff2e8;
-  --sidebar-active-text: #1f8f5f;
-  --sidebar-hover: #eef4eb;
+  --sidebar-bg: var(--color-page-bg);
+  --sidebar-border: var(--color-avatar-grad-start);
+  --sidebar-foreground: var(--color-text-primary);
+  --sidebar-muted: var(--color-text-subtle);
+  --sidebar-active-bg: var(--color-brand-green-soft);
+  --sidebar-active-text: var(--color-brand-green-strong);
+  --sidebar-hover: var(--color-brand-green-hover);
   width: 100%;
   height: 100%;
   background-color: var(--sidebar-bg);
@@ -99,13 +99,13 @@
 
 .navItem:hover {
   background: var(--sidebar-hover);
-  color: #607164;
+  color: var(--color-text-sidebar-hover);
 }
 
 .active {
   background: var(--sidebar-active-bg);
   color: var(--sidebar-active-text);
-  box-shadow: inset 0 0 0 1px rgba(31, 143, 95, 0.05);
+  box-shadow: inset 0 0 0 1px var(--color-overlay-brand-05);
 }
 
 .footer {
@@ -125,22 +125,22 @@
   min-height: 48px;
   border-radius: 14px;
   min-width: 0;
-  background: rgba(255, 255, 255, 0.72);
-  box-shadow: inset 0 0 0 1px rgba(228, 233, 223, 0.9);
+  background: var(--color-overlay-white-72);
+  box-shadow: inset 0 0 0 1px var(--color-overlay-sidebar-border);
   transition: padding 0.22s ease, background-color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .avatar {
   width: 28px;
   height: 28px;
-  background: linear-gradient(180deg, #e4e9df 0%, #cdd7ca 100%);
+  background: linear-gradient(180deg, var(--color-avatar-grad-start) 0%, var(--color-avatar-grad-end) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 600;
-  color: #526052;
+  color: var(--color-text-avatar-alt);
   flex-shrink: 0;
 }
 
@@ -163,7 +163,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #334034;
+  color: var(--color-text-sidebar-strong);
 }
 
 .userEmail {
@@ -191,8 +191,8 @@
 }
 
 .logoutBtn:hover {
-  color: #334034;
-  background: rgba(255, 255, 255, 0.64);
+  color: var(--color-text-sidebar-strong);
+  background: var(--color-overlay-white-64);
 }
 
 .logoutLabel {

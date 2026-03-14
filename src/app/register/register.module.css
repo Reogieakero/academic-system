@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   height: 100dvh;
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-kulim-park);
   background-color: #ffffff;
   overflow: hidden;
 }

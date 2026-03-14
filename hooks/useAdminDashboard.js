@@ -71,7 +71,7 @@ export default function useAdminDashboard() {
         .single();
 
       if (!prof || !['admin', 'principal'].includes(prof.role)) {
-        router.replace('/home');
+        router.replace('/');
         return;
       }
 

@@ -12,7 +12,7 @@ export async function POST(request) {
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from('profiles')
-    .select('status')
+    .select('id, email, first_name, last_name, role, status')
     .eq('id', data.user.id)
     .single();
 
@@ -37,10 +37,21 @@ export async function POST(request) {
     );
   }
 
+  const redirectPath = ['admin', 'principal'].includes(profile.role) ? '/admin' : '/';
+
   return Response.json({
     session: {
       access_token: data.session.access_token,
       refresh_token: data.session.refresh_token,
     },
+    user: {
+      id: data.user.id,
+      email: data.user.email,
+      first_name: profile.first_name,
+      last_name: profile.last_name,
+      role: profile.role,
+      status: profile.status,
+    },
+    redirectPath,
   });
 }
