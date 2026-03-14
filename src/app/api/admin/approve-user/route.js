@@ -39,6 +39,15 @@ export async function POST(request) {
     return Response.json({ error: 'Forbidden: insufficient permissions' }, { status: 403 });
   }
 
+  const { data: authUserData, error: authUserError } = await supabaseAdmin.auth.admin.getUserById(userId);
+  if (authUserError || !authUserData?.user) {
+    return Response.json({ error: 'Target user not found in authentication records.' }, { status: 404 });
+  }
+
+  if (!authUserData.user.email_confirmed_at) {
+    return Response.json({ error: 'User email is not verified yet.' }, { status: 400 });
+  }
+
   const newStatus = action === 'reject' ? 'rejected' : 'approved';
 
   const { error: updateError } = await supabaseAdmin
