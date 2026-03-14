@@ -1,6 +1,6 @@
 'use client';
 
-import { LogOut } from 'lucide-react';
+import { LogOut, Search } from 'lucide-react';
 import styles from './AdminTopNav.module.css';
 
 export default function AdminTopNav({ profile, onSignOut }) {
@@ -14,8 +14,18 @@ export default function AdminTopNav({ profile, onSignOut }) {
     <div className={styles.topNav}>
       <div className={styles.topNavLeft}>
         <div className={styles.navLogo}>O</div>
-        <span className={styles.navSlash}>/</span>
         <p className={styles.navOrg}>OmniStudy Org</p>
+      </div>
+
+      <div className={styles.topNavCenter}>
+        <div className={styles.searchWrapper}>
+          <Search size={16} className={styles.searchIcon} />
+          <input 
+            type="text" 
+            placeholder="Search everything..." 
+            className={styles.searchInput} 
+          />
+        </div>
       </div>
 
       <div className={styles.topNavRight}>

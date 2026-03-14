@@ -51,7 +51,6 @@ export default function AdminPage() {
           <header className={styles.header}>
 
             <div className={styles.headerTitleBlock}>
-              <p className={styles.breadcrumb}>OmniStudy &rsaquo; {pageTitle}</p>
               <h1 className={styles.pageTitle}>{pageTitle}</h1>
             </div>
           </header>
